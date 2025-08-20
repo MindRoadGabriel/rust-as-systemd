@@ -1,0 +1,19 @@
+[package]
+name = "rust-as-systemd"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.98"
+ctrlc = "3.4.7"
+log = "0.4.27"
+simplelog = "0.12.2"
+
+[package.metadata.deb]
+maintainer = "A B <a.b@example.com>"
+copyright = "2025, A B"
+license-file = ["LICENSE"]
+assets = [
+    ["target/release/rust-as-systemd", "usr/bin/", "775"],
+    ["rust-as-systemd.service", "lib/systemd/system/", "775"]
+]

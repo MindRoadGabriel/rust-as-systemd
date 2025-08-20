@@ -1,0 +1,14 @@
+[Unit]
+Description=Rust as systemd service
+ConditionPathExists=/usr/bin/rust-as-systemd
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/rust-as-systemd
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
