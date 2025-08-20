@@ -21,15 +21,14 @@ fn main() -> anyhow::Result<()> {
     })?;
 
     info!("Starting the daemon");
+    let mut i = 0;
     while running.load(Ordering::SeqCst) {
-        info!("Checking...");
-        let path = "/home/victim/stubborn_file.txt";
-        if !std::path::Path::new(path).exists() {
-            info!("Creating file {}", path);
-            fs::write(path, "I refuse to be deleted.\n")?;
-        }
+        info!("Updating file to {}...", i);
+        let path = "./output_file.txt";
+        fs::write(path, format!("Written from cycle {}", i))?;
 
-        thread::sleep(Duration::from_secs(15));
+        thread::sleep(Duration::from_secs(8));
+        i += 1;
     }
     info!("Exiting...");
     Ok(())
